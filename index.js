@@ -27,7 +27,8 @@ mongoose.connect(process.env.DB_CONNECTION,{ useNewUrlParser: true, useUnifiedTo
 // Define a User model
 const User = mongoose.model('User', {
     email: String,
-    password: String
+    password: String,
+    createdAt: {type: Date, default: Date.now}
 });
 
 // Login endpoint
