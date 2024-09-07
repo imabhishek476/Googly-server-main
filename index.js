@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const { generatePuppeteer } = require('./puppeteer');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -57,6 +58,8 @@ app.post('/login', async (req, res) => {
     }
 
 });
+
+app.post('/vibepulse/fabric/design', generatePuppeteer)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
