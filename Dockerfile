@@ -28,9 +28,6 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
 # Copy the rest of the application code
 COPY . .
 
-# Copy the .env file
-COPY .env .env
-
 # Expose the port the app runs on
 EXPOSE 3000
 
