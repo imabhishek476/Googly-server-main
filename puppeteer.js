@@ -14,7 +14,7 @@ exports.generatePuppeteer = async (req, res) => {
     const browser = await puppeteer.launch({
       headless: true,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
-      executablePath: '/usr/bin/google-chrome'
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH
     });
     // console.log(puppeteer.executablePath());
 

@@ -1,37 +1,11 @@
-# Use the official Node.js image as the base image
-FROM node:14-slim
+FROM ghcr.io/puppeteer/puppeteer:23.3.0
 
-# Set the working directory
-WORKDIR /app
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/use/bin/google-chrome-stable
 
-# Copy package.json and package-lock.json
-COPY package.json package-lock.json ./
+WORKDIR /usr/src/app
 
-# Install dependencies
-RUN npm install
-
-# Install Puppeteer dependencies
-RUN apt-get update && apt-get install -y \
-    wget \
-    gnupg \
-    --no-install-recommends \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Add Google Chrome's official GPG key
-RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
-
-# Set up the Chrome repository
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-
-# Install Google Chrome
-RUN apt-get update && apt-get install -y google-chrome-stable && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Copy the rest of the application code
+COPY package*.json ./
+RUN npm ci
 COPY . .
-
-# Expose the port the app runs on
-EXPOSE 3000
-
-# Command to run the application
-CMD ["npm", "start"]
+CMD [ "node", "index.js"]
