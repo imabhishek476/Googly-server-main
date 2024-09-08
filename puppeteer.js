@@ -13,8 +13,8 @@ exports.generatePuppeteer = async (req, res) => {
     // console.log(puppeteer.executablePath());
     const browser = await puppeteer.launch({
       headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH
+      // args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      // executablePath: process.env.PUPPETEER_EXECUTABLE_PATH
     });
     // console.log(puppeteer.executablePath());
 
