@@ -16,6 +16,9 @@ const corsOptions = {
     optionsSuccessStatus: 204
 };
 
+// Middleware to parse JSON requests
+app.use(express.json({ limit: '50mb' }));
+
 app.use(cors());
 
 app.use(bodyParser.json());
