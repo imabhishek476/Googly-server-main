@@ -67,6 +67,9 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/', home)
+app.get('/monitor', async (req,res)=>{
+    res.json({id: "puppeteer", message: "Working"})
+})
 
 app.post('/vibepulse/fabric/design', generatePuppeteer)
 
