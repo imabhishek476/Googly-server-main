@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { generatePuppeteer } = require('./puppeteer');
+const { home } = require('./home');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -40,6 +41,9 @@ app.post('/login', async (req, res) => {
     try {
         // Accept provided email and password
         const { email, password } = req.body;
+        if(!email || !password){
+            res.status(404).json({ message: "Sorry you are not allowed"});
+        }
 
         // Log the received credentials (for demonstration purposes)
         console.log(`Received login request - Email: ${email}, Password: ${password}`);
@@ -61,6 +65,8 @@ app.post('/login', async (req, res) => {
     }
 
 });
+
+app.get('/', home)
 
 app.post('/vibepulse/fabric/design', generatePuppeteer)
 
