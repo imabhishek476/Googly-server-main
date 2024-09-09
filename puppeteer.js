@@ -11,20 +11,17 @@ exports.generatePuppeteer = async (req, res) => {
   }
   try {
     // console.log(puppeteer.executablePath());
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"]
-      // executablePath: process.env.PUPPETEER_EXECUTABLE_PATH
-    });
+    const browser = await puppeteer.launch();
     // console.log(puppeteer.executablePath());
 
     const page = await browser.newPage();
 
+    await page.setViewport({ width: 400, height: 400 });
     // Set up the HTML content with the image and SVG
     const htmlContent = `<div style="position: relative; width: 400; height: 400px;">
           <img src="${frontImageUrl}" style="width: 100%; object-fit: cover;" />
-          <div style="position: absolute; top: 70px; left: 115px; width: 100%;">
-            <div style="width: 25px; height: 25px">
+          <div style="position: absolute; top: 71px; left: 115px; width: 100%;">
+            <div style="width: 26px; height: 27px">
               ${frontSvgContent}
             </div>
           </div>
@@ -34,7 +31,8 @@ exports.generatePuppeteer = async (req, res) => {
     // Capture the screenshot of the content
     const screenshotBuffer = await page.screenshot({
       encoding: "base64",
-      omitBackground: true
+      omitBackground: true,
+      clip: { x: 0, y: 0, width: 400, height: 400 }
     });
     await page.close();
     await browser.close();
