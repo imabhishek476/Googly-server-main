@@ -51,3 +51,68 @@ exports.generatePuppeteer = async (req, res) => {
       .json({ error: "Error capturing the design", details: error.message });
   }
 };
+
+exports.downloadPdfFromHtml = async (req, res) => {
+  try {
+    const {html, cssString, fileName } = req.body;
+
+    if (!html || !cssString) {
+      return { error: true, msg: "Missing html or cssString in request" };
+    }
+
+    const fullHTML = `
+    <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            ${cssString}
+          </style>
+        </head>
+        <body>
+          ${html}
+        </body>
+      </html>
+    `;
+
+    const browser = await puppeteer.launch({
+      headless: "new",
+      args: ["--no-sandbox", "--disable-setuid-sandbox"], // for some server environments
+    });
+    const page = await browser.newPage();
+
+    await page.setContent(fullHTML, { waitUntil: "networkidle0" });
+
+    // Optional: Generate a unique filename
+    const filename = fileName || `${Date.now()}.pdf`;
+    const outputPath = path.join(__dirname, "../pdfs", filename);
+
+    // Make sure directory exists
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+
+    await page.pdf({
+      path: outputPath,
+      format: "A4",
+      printBackground: true,
+      margin: {
+        top: '20mm',
+        right: '10mm',
+        bottom: '20mm',
+        left: '10mm',
+      },
+    });
+
+    await browser.close();
+
+    const fileBuffer = fs.readFileSync(outputPath);
+    res.set("Content-Type", "application/pdf");
+    res.set("Content-Disposition", `attachment; filename=${filename}`);
+    res.send(fileBuffer);
+
+    // Clean up - delete the file after sending
+    fs.unlinkSync(outputPath);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Error capturing the design", details: error.message });
+  }
+};
