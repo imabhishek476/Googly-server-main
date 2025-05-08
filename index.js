@@ -25,9 +25,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Connect to MongoDB (replace 'YOUR_MONGODB_CONNECTION_STRING' with your actual connection string) //
-mongoose.connect(process.env.DB_CONNECTION,{ useNewUrlParser: true, useUnifiedTopology: true})
-.then(res=>{console.log("connected successfully")})
-.catch(error => console.log(error));
+// mongoose.connect(process.env.DB_CONNECTION,{ useNewUrlParser: true, useUnifiedTopology: true})
+// .then(res=>{console.log("connected successfully")})
+// .catch(error => console.log(error));
 
 // Define a User model
 const User = mongoose.model('User', {
