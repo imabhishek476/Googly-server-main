@@ -74,7 +74,7 @@ app.get('/monitor', async (req,res)=>{
 })
 
 app.post('/vibepulse/fabric/design', generatePuppeteer)
-app.get('/puppeteer/html2pdf', downloadPdfFromHtml);
+app.post('/puppeteer/html2pdf', downloadPdfFromHtml);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
