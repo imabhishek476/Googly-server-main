@@ -7,7 +7,7 @@ exports.generatePuppeteer = async (req, res) => {
   const { frontImageUrl, frontSvgContent } = req.body;
 
   if (!frontImageUrl || !frontSvgContent) {
-    res.status(200).json({ error: "Error capturing the design" });
+    return res.status(400).json({ error: "Missing image or SVG content" });
   }
   try {
     // console.log(puppeteer.executablePath());
@@ -57,7 +57,7 @@ exports.downloadPdfFromHtml = async (req, res) => {
     const {html, cssString, fileName } = req.body;
 
     if (!html || !cssString) {
-      return { error: true, msg: "Missing html or cssString in request" };
+      return res.status(400).json({ error: "Missing html or css" });
     }
 
     const fullHTML = `
