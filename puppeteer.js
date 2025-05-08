@@ -75,7 +75,7 @@ exports.downloadPdfFromHtml = async (req, res) => {
     `;
 
     const browser = await puppeteer.launch({
-      headless: "new",
+      headless: true,
       args: ["--no-sandbox", "--disable-setuid-sandbox"], // for some server environments
     });
     const page = await browser.newPage();
@@ -84,13 +84,13 @@ exports.downloadPdfFromHtml = async (req, res) => {
 
     // Optional: Generate a unique filename
     const filename = fileName || `${Date.now()}.pdf`;
-    const outputPath = path.join(__dirname, "../pdfs", filename);
+    // const outputPath = path.join(__dirname, "../pdfs", filename);
 
     // Make sure directory exists
-    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+    // fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
-    await page.pdf({
-      path: outputPath,
+    const pdfBuffer = await page.pdf({
+      // path: outputPath,
       format: "A4",
       printBackground: true,
       margin: {
@@ -103,14 +103,14 @@ exports.downloadPdfFromHtml = async (req, res) => {
 
     await browser.close();
 
-    const fileBuffer = fs.readFileSync(outputPath);
-    res.set("Content-Type", "application/pdf");
-    res.set("Content-Disposition", `attachment; filename=${filename}`);
-    res.send(fileBuffer);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.send(pdfBuffer);
 
     // Clean up - delete the file after sending
-    fs.unlinkSync(outputPath);
+    // fs.unlinkSync(outputPath);
   } catch (error) {
+    console.log("Puppeteer Error:", error)
     res
       .status(500)
       .json({ error: "Error capturing the design", details: error.message });
