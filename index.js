@@ -66,7 +66,9 @@ app.post('/login', async (req, res) => {
 
 });
 
-app.get('/', home)
+app.get('/', async (req,res)=>{
+    res.json({id: "puppeteer", message: "Working"})
+})
 app.get('/monitor', async (req,res)=>{
     res.json({id: "puppeteer", message: "Working"})
 })
