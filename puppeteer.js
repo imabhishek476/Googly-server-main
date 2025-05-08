@@ -7,7 +7,7 @@ exports.generatePuppeteer = async (req, res) => {
   const { frontImageUrl, frontSvgContent } = req.body;
 
   if (!frontImageUrl || !frontSvgContent) {
-    return res.status(400).json({ error: "Missing image or SVG content" });
+    res.status(200).json({ error: "Error capturing the design" });
   }
   try {
     // console.log(puppeteer.executablePath());
