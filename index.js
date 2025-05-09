@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const { generatePuppeteer, downloadPdfFromHtml } = require('./puppeteer');
+const { generatePuppeteer, downloadPdfFromHtml, downloadPdfNode } = require('./puppeteer');
 const { home } = require('./home');
 
 const app = express();
@@ -75,6 +75,7 @@ app.get('/monitor', async (req,res)=>{
 
 app.post('/vibepulse/fabric/design', generatePuppeteer)
 app.post('/puppeteer/html2pdf', downloadPdfFromHtml);
+app.post('/app/pdf', downloadPdfNode);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

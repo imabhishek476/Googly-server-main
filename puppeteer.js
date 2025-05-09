@@ -2,6 +2,7 @@ const { default: puppeteer } = require("puppeteer");
 const dotenv = require("dotenv");
 const fs = require("fs");
 const path = require("path");
+const pdf = require('html-pdf-node');
 
 exports.generatePuppeteer = async (req, res) => {
   const { frontImageUrl, frontSvgContent } = req.body;
@@ -115,4 +116,42 @@ exports.downloadPdfFromHtml = async (req, res) => {
       .status(500)
       .json({ error: "Error capturing the design", details: error.message });
   }
+};
+
+exports.downloadPdfNode = async (req, res) => {
+    try {
+      // Your raw HTML
+      const {html, cssString, fileName } = req.body;
+      const fullHTML = `
+            <!DOCTYPE html>
+            <html>
+                <head>
+                <style>
+                    ${cssString}
+                </style>
+                </head>
+                <body>
+                ${html}
+                </body>
+            </html>
+    `;
+  
+      // Define the document
+      let options = { format: 'A4' };
+      let file = { content: fullHTML };
+  
+      // Create PDF
+      const buffer = await pdf.generatePdf(file, options);
+  
+      res.writeHead(200, {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename=document.pdf',
+        'Content-Length': buffer.length,
+      });
+      res.end(buffer);
+  
+    } catch (err) {
+      console.error('PDF Generation Error:', err);
+      res.status(500).json({ error: 'Failed to generate PDF', details: err.message });
+    }
 };
